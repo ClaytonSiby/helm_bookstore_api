@@ -1,24 +1,35 @@
-version: '3.7'
+version: '3.8'
 
 services:
   api:
+    container_name: helm_books_api
     build:
-      context: ./bookstore_api
+      context: .
       dockerfile: Dockerfile
     restart: unless-stopped
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - ./bookstore_api:/app
     ports:
       - 8000:8000
     env_file:
-      - .env
+      - helm.env
+    depends_on:
+      - db
+    networks:
+      - helm_network
 
   db:
+    container_name: helm_books_db
     image: postgres:13.11
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=helm_bookstore_api
       - POSTGRES_USER=helm_admin
       - POSTGRES_PASSWORD=password
+    networks:
+      - helm_network
+
+networks:
+  helm_network:
+
+volumes:
+  postgres_data:
