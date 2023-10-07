@@ -21,8 +21,11 @@ from books_api import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('books', views.books_list),
-    path('books/add_book/', views.books_create),
+    path('books/', views.get_books_list),
+    path('books/add_book/', views.create_book),
+    path('books/<int:pk>/', views.get_book_details),
+    path('books/<int:pk>/update/', views.update_book),
+    path('books/<int:pk>/delete/', views.delete_book),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
