@@ -21,6 +21,8 @@ from books_api import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.books_list),
+    path('books', views.books_list),
     path('books/add_book/', views.books_create),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
