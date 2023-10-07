@@ -2,9 +2,14 @@
 
 FROM python:3.12.0
 ENV PYTHONUNBUFFERED=1
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+ENV PYTHONDONTWRITEBYTECODE 1
+RUN mkdir /app
 COPY . /app/
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+WORKDIR /app
+RUN set -e; \
+    /usr/local/bin/python -m pip install --upgrade pip ;\
+    python -m pip install -r ./requirements.txt ;\
+    chmod +x ./entrypoint.sh ;
+
 EXPOSE 8000
+ENTRYPOINT ["./entrypoint.sh"]
