@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'helm_bookstore_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'helm_bookstore',
+        'NAME': 'helm_bookstore_api',
         'USER': 'helm_admin',
         'PASSWORD': 'password',
         'HOST': 'localhost',
