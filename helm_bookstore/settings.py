@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-vroqb@g5h3s*)^jd#@c8+q!9yl1sr3xix^70wckjq!y+vws6_%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'helm_bookstore_api',
         'USER': 'helm_admin',
         'PASSWORD': 'password',
-        'HOST': 'localhost',
+        'HOST': 'helm_books_db',
         'PORT': '5432',
     }
 }
