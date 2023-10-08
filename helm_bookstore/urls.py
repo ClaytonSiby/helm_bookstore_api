@@ -1,17 +1,16 @@
-"""
-URL configuration for helm_bookstore project.
-"""
-
 from django.contrib import admin
 from django.urls import path
-from rest_framework.urlpatterns import format_suffix_patterns
-from books_api import views
+from books_api.views import (
+    BookListCreateAPI,
+    BookDetailAPI,
+    CategoryListCreateAPI,
+    CategoryDetailAPI,
+)
 
-urlpatterns = format_suffix_patterns([
+urlpatterns = [
     path('api/admin/', admin.site.urls),
-    path('api/books/', views.get_books_list, name='books'),
-    path('api/books/add_book/', views.create_book, name="add_book"),
-    path('api/books/<int:pk>/', views.get_book_details, name="book_details"),
-    path('api/books/<int:pk>/update/', views.update_book, name="update_book"),
-    path('api/books/<int:pk>/delete/', views.delete_book, name="delete_book"),
-])
+    path('api/books/', BookListCreateAPI.as_view(), name='book-list-create'),
+    path('api/books/<int:pk>/', BookDetailAPI.as_view(), name='book-detail'),
+    path('api/categories/', CategoryListCreateAPI.as_view(), name='category-list-create'),
+    path('api/categories/<int:pk>/', CategoryDetailAPI.as_view(), name='category-detail'),
+]
