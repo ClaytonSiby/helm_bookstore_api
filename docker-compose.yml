@@ -10,7 +10,7 @@ services:
     ports:
       - 8000:8000
     env_file:
-      - .helm.env
+      - .env
     depends_on:
       - db
     networks:
@@ -21,10 +21,12 @@ services:
     image: postgres:13.11
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
     environment:
-      - POSTGRES_DB=helm_bookstore_api
-      - POSTGRES_USER=helm_admin
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     networks:
       - helm_network
 
