@@ -6,6 +6,6 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py test
 
-# python manage.py runserver 0.0.0.0:8000
+gunicorn -b 0.0.0.0:8000 --access-logfile - --workers 3 --threads 3 --log-level=debug helm_books.wsgi:application
 
 exec "$@"
