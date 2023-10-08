@@ -16,6 +16,13 @@ class BookListCreateAPI(ListAPIView, CreateAPIView):
     def list(self, request, *args, **kwargs):
         serializer = self.serializer_class(self.get_queryset(), many=True)
         return Response({"message": "Success", "books": serializer.data}, status=status.HTTP_200_OK)
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Success", "book": serializer.data}, status=status.HTTP_201_CREATED)
+        return Response({"message": "Error", "errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 class BookDetailAPI(RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
