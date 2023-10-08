@@ -2,7 +2,6 @@
 
 set -o errexit
 
-python manage.py migrate books_api --fake zero
 python manage.py makemigrations
 python manage.py migrate
 
