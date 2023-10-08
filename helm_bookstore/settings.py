@@ -62,8 +62,9 @@ WSGI_APPLICATION = 'helm_bookstore.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if os.getenv('ENVIRONMENT') == 'production':
-    DATABASES = {'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))}
+if os.environ.get('ENVIRONMENT') == 'production':
+    DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')
+)}
 else:
     DATABASES = {
         'default': {
