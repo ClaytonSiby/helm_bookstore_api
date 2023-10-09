@@ -25,7 +25,6 @@ Follow the following setup instructions to run this on your local environment:
 - Django 4.2.6 <br />
 - Django Rest Framework 3.14.0 <br />
 - Postgresql 13.12
-- Python <br />
 - Pip <br />
 
 
