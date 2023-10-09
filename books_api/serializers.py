@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'name', 'books', 'created_at', 'updated_at']
+        fields = ['id', 'name', 'books', 'description', 'created_at', 'updated_at']
 
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
