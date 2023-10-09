@@ -22,7 +22,7 @@ Follow the following setup instructions to run this on your local environment:
 
 <h4>Requirements:</h4>
 
-- Docker/Docker Deskstop <br />
+- Docker/Docker Desktop <br />
 - Python 3.12.0 <br />
 - Django 4.2.6 <br />
 - Django Rest Framework 3.14.0 <br />
@@ -41,7 +41,7 @@ Follow the following setup instructions to run this on your local environment:
 3. **To run the application on your local:**
 
 - Run `pip install virtualenv` to install virtualenv an essential tool for creating a virtual environment for the project.
-- Run `virtualenv .venv` to create the the virtual environment (the name can be anything)
+- Run `virtualenv .venv` to create the virtual environment (the name can be anything)
 - Run `source ./.venv/bin/activate` to activate the environment (this ensures that all dependencies installed are only changed on your current environment, e.t.c)
 - Run `pip install -r requirements.txt` to install all dependencies essential for this project <br />
 - make sure the helm_bookstore/settings.py db configuration looks like this (the `localhost` is your db host) e.g:
@@ -59,8 +59,8 @@ DATABASES = {
 }
 ```
 
-> Run `chmod +x ./build.sh && ./build.sh` to `makemigrations`, `migrate`, and start a gunicorn server on `http://0.0.0.0:8000`  <br />
-> Run `python manage.py test` to run all available tests for the project
+- Run `chmod +x ./build.sh && ./build.sh` to `makemigrations`, `migrate`, and start a gunicorn server on `http://0.0.0.0:8000`  <br />
+- Run `python manage.py test` to run all available tests for the project
 
 3. **To run in a container:**
 - Setup docker stack: > this will setup two services (`api`, `db`, and `nginx`) on the same network (i.e helm_network): <br />
