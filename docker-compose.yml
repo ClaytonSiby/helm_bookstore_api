@@ -9,6 +9,8 @@ services:
     restart: unless-stopped
     ports:
       - 8000:8000
+    expose:
+      - "443"
     env_file:
       - .env
     depends_on:
@@ -18,15 +20,26 @@ services:
 
   db:
     container_name: helm_books_db
-    image: postgres:13.11
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    image: postgres:13.12
     env_file:
       - .env
     environment:
-      - POSTGRES_DB=helm_bookstore_db
+      - POSTGRES_DB=bookstore_db
       - POSTGRES_USER=helm_admin
       - POSTGRES_PASSWORD=password
+    networks:
+      - helm_network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - ./config/nginx/:/etc/nginx/conf.d
+    depends_on:
+      - api
     networks:
       - helm_network
 

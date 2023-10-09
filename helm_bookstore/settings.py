@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG')
 
 # allowed hosts
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',') if os.getenv('ALLOWED_HOSTS') else ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
 # Application definition
 INSTALLED_APPS = [
@@ -69,10 +69,10 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'helm_bookstore_db',
+            'NAME': 'bookstore_db',
             'USER': 'helm_admin',
-            'PASSWORD': 'helm-pass',
-            'HOST': 'localhost',
+            'PASSWORD': 'password',
+            'HOST': 'db',
             'PORT': '5432',
         }
     }
