@@ -4,7 +4,7 @@
 
 | Http Verb    | ApiEndpoint              | Usage                        |
 | :---         |     :---                 |          ---:                |
-| POST         | /api/books/add_book/     | Add a new book               |
+| POST         | /api/books/              | Add a new book               |
 | GET          | /api/books/              | Get all available books      |
 | GET          | /api/books/:id/          | Get a book and see details   |
 | PUT          | /api/books/:id/          | Update a book                |
