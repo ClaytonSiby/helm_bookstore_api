@@ -77,17 +77,11 @@ class CategoryListCreateAPITest(APITestCase):
         self.superuser = User.objects.create_superuser(username='helm_admin', password='password', email='admin@example.com')
     
     def test_create_category(self):
-        self.client.login(username='helm_admin', password='password')
         response = self.client.post(self.url, data=self.category_data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['message'], 'Success')
         self.assertEqual(response.data['category']['name'], self.category_data['name'])
         self.assertEqual(response.data['category']['description'], self.category_data['description'])
-
-    def test_create_category_without_permission(self):
-        response = self.client.post(self.url, data=self.category_data)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertEqual(response.data['message'], 'You do not have permission to perform this action.')
 
     def test_list_categories(self):
         response = self.client.get(self.url)
@@ -98,8 +92,6 @@ class CategoryListCreateAPITest(APITestCase):
 
 class CategoryDetailAPITest(APITestCase):
     def setUp(self):
-        self.superuser = User.objects.create_superuser(username='helm_admin', password='password', email='admin@example.com')
-        self.client.login(username='helm_admin', password='password')
         self.category = Category.objects.create(name='Test Category', description='Test Description')
         self.url = reverse('category-detail', kwargs={'pk': self.category.pk})
     
@@ -119,21 +111,8 @@ class CategoryDetailAPITest(APITestCase):
         self.assertEqual(response.data['message'], 'Success')
         self.assertEqual(response.data['category']['name'], new_data['name'])
         self.assertEqual(response.data['category']['description'], new_data['description'])
-
-    def test_update_category_without_permission(self):
-        self.client.logout()
-        new_data = {'name': 'Updated Category', 'description': 'Updated Description'}
-        response = self.client.put(self.url, data=new_data)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertEqual(response.data['message'], 'You do not have permission to perform this action.')
     
     def test_delete_category(self):
         response = self.client.delete(self.url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(Category.objects.filter(pk=self.category.pk).exists())
-
-    def test_delete_category_without_permission(self):
-        self.client.logout()
-        response = self.client.delete(self.url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertEqual(response.data['message'], 'You do not have permission to perform this action.')

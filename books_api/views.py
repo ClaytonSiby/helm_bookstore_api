@@ -51,9 +51,6 @@ class CategoryListCreateAPI(ListCreateAPIView):
     serializer_class = CategorySerializer
 
     def create(self, request, *args, **kwargs):
-        if not request.user.is_staff:
-            return Response({"message": "You do not have permission to perform this action."}, status=status.HTTP_403_FORBIDDEN)
-
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -67,16 +64,8 @@ class CategoryListCreateAPI(ListCreateAPIView):
 class CategoryDetailAPI(RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-
-    def destroy(self, request, *args, **kwargs):
-        if not request.user.is_staff:
-            return Response({"message": "You do not have permission to perform this action."}, status=status.HTTP_403_FORBIDDEN)
-        return super().destroy(request, *args, **kwargs)
     
     def update(self, request, *args, **kwargs):
-        if not request.user.is_staff:
-            return Response({"message": "You do not have permission to perform this action."}, status=status.HTTP_403_FORBIDDEN)
-        
         instance = self.get_object()
         serializer = self.serializer_class(instance, data=request.data)
         if serializer.is_valid():
