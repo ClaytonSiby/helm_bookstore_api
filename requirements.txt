@@ -13,3 +13,4 @@ psycopg2-binary==2.9.9
 pytz==2023.3.post1
 whitenoise==6.5.0
 python-dotenv==1.0.0
+django-cors-headers==4.2.0
