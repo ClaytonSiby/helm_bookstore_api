@@ -2,6 +2,8 @@
 
 This is a user-friendly API using Django Rest Framework (DRF) for a bookstore management system. The main idea is to offer a bunch of useful functions for handling book information effortlessly. Users can do everything from adding, viewing, and updating, to removing book details. Plus, it also offers a neat feature where users can neatly organize their booklists by creating categories.
 
+>> The API is well documented for each endpoint [here](https://app.swaggerhub.com/apis-docs/CLAYTONSIBY_1/BookstoreAPI/1.0.0)
+
 ## API Endpoints Available
 
 | Http Verb    | ApiEndpoint              | Usage                        |
