@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: helm_books_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    expose:
+      - "443"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    networks:
+      - helm_network
+
+  db:
+    container_name: helm_books_db
+    image: postgres:13.12
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=bookstore_db
+      - POSTGRES_USER=helm_admin
+      - POSTGRES_PASSWORD=password
+    networks:
+      - helm_network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - ./config/nginx/:/etc/nginx/conf.d
+    depends_on:
+      - api
+    networks:
+      - helm_network
+
+networks:
+  helm_network:
+
+volumes:
+  postgres_data:
