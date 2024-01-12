@@ -6,6 +6,8 @@ from rest_framework.generics import (
 )
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from corsheaders.signals import check_request_enabled
 from .models import Book, Category
 from .serializers import BookSerializer, CategorySerializer
@@ -13,6 +15,8 @@ from .serializers import BookSerializer, CategorySerializer
 class BookListCreateAPI(ListAPIView, CreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
         serializer = self.serializer_class(self.get_queryset(), many=True)
@@ -33,6 +37,8 @@ class BookListCreateAPI(ListAPIView, CreateAPIView):
 class BookDetailAPI(RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -62,6 +68,8 @@ class BookDetailAPI(RetrieveUpdateDestroyAPIView):
 class CategoryListCreateAPI(ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
@@ -81,6 +89,8 @@ class CategoryListCreateAPI(ListCreateAPIView):
 class CategoryDetailAPI(RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
