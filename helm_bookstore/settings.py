@@ -88,7 +88,7 @@ else:
             'NAME': 'bookstore_db',
             'USER': 'helm_admin',
             'PASSWORD': 'password',
-            'HOST': 'localhost',
+            'HOST': 'db',
             'PORT': '5432',
         }
     }
